@@ -3,9 +3,8 @@ package main
 import (
 	// "encoding/json"
 	"github.com/gin-gonic/gin"
-
-
 )
+
 func main() {
 	// golang_library_mpk.LoadEnv(".env.local")
 
@@ -24,7 +23,6 @@ func main() {
 	ginEngine := gin.Default()
 
 	RegisterRoutes(ginEngine)
-	
 
 	/* ---------------------------  Public routes  --------------------------- */
 
@@ -35,7 +33,7 @@ func main() {
 	//region gets
 
 	// public.GET("/emailToken/:userEmail", getEmailToken)
-	
+
 	// //endregion gets
 
 	// //region patches
@@ -54,7 +52,7 @@ func main() {
 	// private := ginEngine.Group("/api/")
 
 	// private.GET("health", healthCheck)
-	
+
 	// private.POST("login", login)
 
 	ginEngine.Run()

@@ -7,6 +7,7 @@ import (
 func RegisterRoutes(ginEngine *gin.Engine){
 	mainEngine := ginEngine.Group("/api/v1")
 	RegisterMainRoutes(mainEngine)
+	
 	unAuthedEngine := ginEngine.Group("/api/")
 	RegisterUnAuthedRoutes(unAuthedEngine)
 }
@@ -19,7 +20,8 @@ func RegisterUnAuthedRoutes(unAuthedEngine *gin.RouterGroup) {
 
 func RegisterMainRoutes(mainEngine *gin.RouterGroup){
 	//region gets
-	// routerGroup.GET("/emailToken/:userEmail", getEmailToken)		
+	mainEngine.GET("/receipts/:id/points", getReceiptPoints)
+	
 	//endregion gets
 
 	//region patches
