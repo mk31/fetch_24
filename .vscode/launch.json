@@ -9,7 +9,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${fileDirname}/fetch_24.go"
+            "program": "${fileDirname}"
         }
     ]
 }

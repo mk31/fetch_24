@@ -13,32 +13,9 @@ func RegisterRoutes(ginEngine *gin.Engine){
 }
 
 func RegisterUnAuthedRoutes(unAuthedEngine *gin.RouterGroup) {
-	// private := ginEngine.Group("/api/")
-
 	unAuthedEngine.GET("health", healthCheck)
 }
 
 func RegisterMainRoutes(mainEngine *gin.RouterGroup){
-	//region gets
 	mainEngine.GET("/receipts/:id/points", getReceiptPoints)
-	
-	//endregion gets
-
-	//region patches
-
-	// routerGroup.PATCH("/patchEmailTokenStandardContactsNextSyncToken", patchEmailTokenStandardContactsNextSyncToken)
-
-	//endregion patches
-
-	//region posts
-
-	// routerGroup.POST("/emailToken", postEmailToken)
-	//endregion posts
-
 }
-
-/* ---------------------------  Private routes  --------------------------- */
-
-// private := ginEngine.Group("/api/")
-
-// private.GET("health", healthCheck)
