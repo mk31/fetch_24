@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"strconv"
 	"strings"
+	"time"
 	"unicode"
 )
 
@@ -65,4 +67,59 @@ func roundTo2Decimals(f float64) float64 {
 
 func endsWithZeroZero(f float64) bool {
 	return f == float64(int(f))
+}
+
+func IsTrimmedLengthMultipleOf3(str string) bool {
+	trimmed := strings.TrimSpace(str)
+
+	strLen := len(trimmed)
+
+	return strLen > 0 && strLen%3 == 0
+}
+
+func RoundUpPoint2(price float64) int {
+	point2Flt := price * .2
+	return int(math.Ceil(point2Flt))
+}
+
+// just handling one date format... really would need to handle more date formats.
+func IsPuchaseDateDayOdd(dateString string) bool {
+	layout := "2006-01-02"
+
+	date, err := time.Parse(layout, dateString)
+
+	if err != nil {
+		fmt.Println("Error parsing date:", err)
+		return false
+	}
+
+	return date.Day()%2 == 1
+}
+
+// just handling one time format... really would need to handle more
+func IsPuchaseTimeBetween14And16Exclusive(timeString string) bool {
+	layout := "15:04"
+
+	time, err := time.Parse(layout, timeString)
+
+	if err != nil {
+		fmt.Println("Error parsing time:", err)
+		return false
+	}
+
+	hour := time.Hour()
+
+	isHour14or15 := hour == 14 || hour == 15
+
+	
+	if !isHour14or15 {
+		return false
+	}
+	
+	minute := time.Minute()
+
+	// we know hour is 2 or 3
+	// if 3, all times work
+	// if 2, minute must be > 0
+	return hour == 3 || minute > 0
 }
