@@ -32,6 +32,4 @@ func (receipt *Receipt) calculatePoints() {
         log.Println("Error converting price to float:", floatParseErr)
     }
 
-
-    return 5
 }

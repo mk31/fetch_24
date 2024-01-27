@@ -92,7 +92,9 @@ func TestCalculatePoints(t *testing.T) {
 		},
 		
 	}
-
+	
+	// TODO: Test receipt with more than 2 decimal places
+	// TODO: Test receipt with .00 and with no decimals
 	for _, test := range tests {
 
 		test.Receipt.calculatePoints()
