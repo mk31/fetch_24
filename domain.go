@@ -65,7 +65,7 @@ func (receipt *Receipt) calculatePoints() {
 
 }
 
-func (receipt Receipt) calculateItemDescriptionLengthPoints() int {
+func (receipt *Receipt) calculateItemDescriptionLengthPoints() int {
 	totalPoints := 0
 
 	for _, item := range receipt.Items {
