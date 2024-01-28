@@ -78,6 +78,42 @@ func TestCalculatePoints(t *testing.T) {
 		return
 	}
 
+
+	testJson3 :=
+		`
+		{
+			"retailer": "M&M Corner Market",
+			"purchaseDate": "2022-03-20",
+			"purchaseTime": "14:33",
+			"items": [
+			  {
+				"shortDescription": "Gatorade",
+				"price": "2.25"
+			  },{
+				"shortDescription": "Gatorade",
+				"price": "2.25"
+			  },{
+				"shortDescription": "Gatorade",
+				"price": "2.25"
+			  },{
+				"shortDescription": "Gatorade",
+				"price": "2.25"
+			  }
+			],
+			"total": "9"
+		  }
+	`
+
+	var receipt3 Receipt
+
+	receipt3Err := json.Unmarshal([]byte(testJson3), &receipt3)
+	if receipt3Err != nil {
+		log.Println(receipt3Err)
+		return
+	}
+
+
+
 	tests := []struct {
 		Receipt Receipt
 		ExpectedPoints int
@@ -88,6 +124,10 @@ func TestCalculatePoints(t *testing.T) {
 		},
 		{
 			Receipt: receipt2,
+			ExpectedPoints: 109,			
+		},
+		{
+			Receipt: receipt3,
 			ExpectedPoints: 109,			
 		},
 		
