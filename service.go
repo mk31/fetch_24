@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/mk31/golang_library_mpk"
 )
 
 func healthCheck(ginContext *gin.Context) {
@@ -43,12 +42,23 @@ func processReceipt(c *gin.Context) {
 		return
 	}
 
-	receipt.
+	receiptId, receiptIdErr := GenerateHash()
+
+	if receiptIdErr != nil {
+		log.Println(receiptIdErr)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "unable to generate uuid"})
+		return
+	}
+
+
+	receipt.Id = receiptId
+
+	receipts[receipt.Id] = receipt
 
 
 // 	Example Response:
 // ```json
 // { "id": "7fb1377b-b223-49d9-a31a-5a02701dd310" }
 
-	c.JSON(http.StatusOK, gin.H{"id": points})
+	c.JSON(http.StatusOK, gin.H{"id": receipt.Id})
 }
