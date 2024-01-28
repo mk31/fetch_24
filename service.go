@@ -18,14 +18,13 @@ func healthCheck(ginContext *gin.Context) {
 func getReceiptPoints(c *gin.Context) {
 	id := c.Param("id")
 
-	// Check if receipt exists
-	points, exists := receipts[id]
+	receipt, exists := receipts[id]
 	if !exists {
 		c.JSON(http.StatusNotFound, gin.H{"error": "No receipt found for that id"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"points": points})
+	c.JSON(http.StatusOK, gin.H{"points": receipt.Points})
 }
 
 func processReceipt(c *gin.Context) {
@@ -50,6 +49,7 @@ func processReceipt(c *gin.Context) {
 		return
 	}
 
+	receipt.calculatePoints()
 
 	receipt.Id = receiptId
 

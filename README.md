@@ -1,3 +1,9 @@
+# INSTRUCTIONS FROM MIKE
+
+Clone repo
+in the root directory run
+```go run .```
+
 # Receipt Processor
 
 Build a webservice that fulfils the documented API. The API is described below. A formal definition is provided 
