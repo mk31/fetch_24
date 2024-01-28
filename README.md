@@ -1,7 +1,7 @@
 # INSTRUCTIONS FROM MIKE
 
 Clone repo
-in the root directory run
+in the root directory run  
 ```go run .```
 
 # Receipt Processor
