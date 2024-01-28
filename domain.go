@@ -1,12 +1,13 @@
 package main
 
 type Receipt struct {
-	Retailer     string `json:"retailer" binding:"required"`
-	PurchaseDate string `json:"purchaseDate" binding:"required"`
-	PurchaseTime string `json:"purchaseTime" binding:"required"`
-	Items        []Item `json:"items" binding:"required"`
-	Total        string `json:"total" binding:"required"`
-	Points       int    `json:"points"`
+	Id     			string `json:"id"`
+	Retailer     	string `json:"retailer" binding:"required"`
+	PurchaseDate 	string `json:"purchaseDate" binding:"required"`
+	PurchaseTime 	string `json:"purchaseTime" binding:"required"`
+	Items        	[]Item `json:"items" binding:"required"`
+	Total       	string `json:"total" binding:"required"`
+	Points       	int    `json:"points"`
 }
 
 type Item struct {

@@ -1,3 +1,3 @@
 package main
 
-var receipts = make(map[string]int) 
+var receipts = make(map[string]Receipt) 

@@ -8,6 +8,8 @@ import (
 	"strings"
 	"time"
 	"unicode"
+
+	"github.com/google/uuid"
 )
 
 func CountAlphanumeric(str string) int {
@@ -111,15 +113,25 @@ func IsPuchaseTimeBetween14And16Exclusive(timeString string) bool {
 
 	isHour14or15 := hour == 14 || hour == 15
 
-	
 	if !isHour14or15 {
 		return false
 	}
-	
+
 	minute := time.Minute()
 
 	// we know hour is 2 or 3
 	// if 3, all times work
 	// if 2, minute must be > 0
 	return hour == 3 || minute > 0
+}
+
+func GenerateHash() (string, error) {
+	u, err := uuid.NewRandom()
+
+	if err != nil {
+		fmt.Printf("Something went wrong: %v", err)
+		return "", err
+	}
+
+	return u.String(), nil
 }

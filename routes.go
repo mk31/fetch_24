@@ -18,4 +18,6 @@ func RegisterUnAuthedRoutes(unAuthedEngine *gin.RouterGroup) {
 
 func RegisterMainRoutes(mainEngine *gin.RouterGroup){
 	mainEngine.GET("/receipts/:id/points", getReceiptPoints)
+	mainEngine.POST("/receipts/process", processReceipt)
+
 }
