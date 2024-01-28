@@ -1,13 +1,13 @@
 package main
 
 type Receipt struct {
-	Id     			string `json:"id"`
-	Retailer     	string `json:"retailer" binding:"required"`
-	PurchaseDate 	string `json:"purchaseDate" binding:"required"`
-	PurchaseTime 	string `json:"purchaseTime" binding:"required"`
-	Items        	[]Item `json:"items" binding:"required"`
-	Total       	string `json:"total" binding:"required"`
-	Points       	int    `json:"points"`
+	Id           string `json:"id"`
+	Retailer     string `json:"retailer" binding:"required"`
+	PurchaseDate string `json:"purchaseDate" binding:"required"`
+	PurchaseTime string `json:"purchaseTime" binding:"required"`
+	Items        []Item `json:"items" binding:"required"`
+	Total        string `json:"total" binding:"required"`
+	Points       int    `json:"points"`
 }
 
 type Item struct {
@@ -45,19 +45,19 @@ func (receipt *Receipt) calculatePoints() {
 		mult25Pts = 25
 	}
 
-	mult2Points := CountMultiplesOf2(len(receipt.Items))*5
+	mult2Points := CountMultiplesOf2(len(receipt.Items)) * 5
 
 	mult3Pts := receipt.calculateItemDescriptionLengthPoints()
 
 	points6 := 0
 
-	if IsPuchaseDateDayOdd(receipt.PurchaseDate) {
+	if IsPurchaseDateDayOdd(receipt.PurchaseDate) {
 		points6 = 6
 	}
 
 	points10 := 0
 
-	if IsPuchaseTimeBetween14And16Exclusive(receipt.PurchaseTime) {
+	if IsPurchaseTimeBetween14And16Exclusive(receipt.PurchaseTime) {
 		points10 = 10
 	}
 

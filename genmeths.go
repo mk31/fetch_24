@@ -85,7 +85,7 @@ func RoundUpPoint2(price float64) int {
 }
 
 // just handling one date format... really would need to handle more date formats.
-func IsPuchaseDateDayOdd(dateString string) bool {
+func IsPurchaseDateDayOdd(dateString string) bool {
 	layout := "2006-01-02"
 
 	date, err := time.Parse(layout, dateString)
@@ -99,7 +99,7 @@ func IsPuchaseDateDayOdd(dateString string) bool {
 }
 
 // just handling one time format... really would need to handle more
-func IsPuchaseTimeBetween14And16Exclusive(timeString string) bool {
+func IsPurchaseTimeBetween14And16Exclusive(timeString string) bool {
 	layout := "15:04"
 
 	time, err := time.Parse(layout, timeString)
