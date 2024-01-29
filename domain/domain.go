@@ -55,7 +55,6 @@ func (receipt *Receipt) CalculatePoints() {
 	}
 
 	receipt.Points = totalPoints
-
 }
 
 func (receipt *Receipt) calculateItemDescriptionLengthPoints() int {
