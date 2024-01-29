@@ -5,7 +5,7 @@ If you do, you will see an error similar to:
 ```[GIN-debug] [ERROR] listen tcp :80: bind: address already in use```
 
 <!-- this needs update - once we add packages -->
-Local
+Local (requires Go is installed)
 1. Clone Repo
 2. From root directory of repo `go run .`
 
