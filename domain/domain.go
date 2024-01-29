@@ -34,11 +34,19 @@ func (receipt *Receipt) CalculatePoints() {
 
 	totalPoints += CountAlphanumeric(receipt.Retailer)
 
-	if DoesStringPriceEndInZero(receipt.Total) {
+	receiptTotal := receipt.Total
+
+	twoDecFloatTotal, decErr := TwoDecimalFloatFromString(receiptTotal)
+
+	if decErr != nil {
+		log.Printf("inside calculate points error attempting to convert: %v into float", receiptTotal)
+	}
+
+	if endsWithZeroZero(twoDecFloatTotal) {
 		totalPoints += 50
 	}
 
-	if DoesStringPriceEndIn25Multiple(receipt.Total) {
+	if isMultipleOf25(twoDecFloatTotal) {
 		totalPoints += 25
 	}
 
@@ -85,37 +93,15 @@ func CountAlphanumeric(str string) int {
 	return count
 }
 
-func DoesStringPriceEndInZero(str string) bool {
-	twoDecimalFloat, err := TwoDecimalFloatFromString(str)
-
-	if err != nil {
-		log.Println("Error creating Two decimal float from string:", err)
-		return false
-	}
-
-	return endsWithZeroZero(twoDecimalFloat)
-}
-
 func TwoDecimalFloatFromString(floatString string) (float64, error) {
 	floatPoints, floatParseErr := strconv.ParseFloat(strings.TrimSpace(floatString), 64)
 
 	if floatParseErr != nil {
 		log.Println("Error converting price to float:", floatParseErr)
-		return -1, floatParseErr
+		return 0, floatParseErr
 	}
 
 	return roundTo2Decimals(floatPoints), nil
-}
-
-func DoesStringPriceEndIn25Multiple(str string) bool {
-	twoDecimalFloat, err := TwoDecimalFloatFromString(str)
-
-	if err != nil {
-		log.Println("Error creating Two decimal float from string:", err)
-		return false
-	}
-
-	return isMultipleOf25(twoDecimalFloat)
 }
 
 func CountMultiplesOf2(count int) int {
