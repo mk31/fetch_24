@@ -154,7 +154,7 @@ func IsPurchaseTimeBetween14And16Exclusive(timeString string) bool {
 	time, err := time.Parse(layout, timeString)
 
 	if err != nil {
-		fmt.Println("Error parsing time:", err)
+		fmt.Printf("Attempting to parse: %v resulted in error: %v", timeString, err)
 		return false
 	}
 
