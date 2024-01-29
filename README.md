@@ -1,5 +1,6 @@
 # RUN INSTRUCTIONS
-Step 0 Make sure you have nothing running on localhost port 80
+Step 0  
+Make sure you have nothing running on localhost port 80
 If you do, you will see an error similar to:
 ```[GIN-debug] [ERROR] listen tcp :80: bind: address already in use```
 
