@@ -140,7 +140,7 @@ func IsPurchaseDateDayOdd(dateString string) bool {
 	date, err := time.Parse(layout, dateString)
 
 	if err != nil {
-		fmt.Println("Error parsing date:", err)
+		log.Printf("Attempting to parse date: %v resulted in error: %v", dateString, err)
 		return false
 	}
 
