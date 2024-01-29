@@ -1,7 +1,8 @@
-package main
+package service
 
 import (
 	"encoding/json"
+	"fetch_24/domain"
 	"io"
 	"log"
 	"net/http"
@@ -9,13 +10,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func healthCheck(ginContext *gin.Context) {
-	log.Println("inside healthcheck")
+type ReceiptServiceImpl struct {
+}
 
-	ginContext.IndentedJSON(http.StatusOK, gin.H{"healthcheck": "great sucess"})
-} // close health check
+func NewReceiptServiceImpl() *ReceiptServiceImpl {
+	return &ReceiptServiceImpl{}
+}
 
-func getReceiptPoints(c *gin.Context) {
+var receipts = make(map[string]domain.Receipt)
+
+
+func (receiptService *ReceiptServiceImpl) GetReceiptPoints(c *gin.Context) {
 	id := c.Param("id")
 
 	receipt, exists := receipts[id]
@@ -27,9 +32,9 @@ func getReceiptPoints(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"points": receipt.Points})
 }
 
-func processReceipt(c *gin.Context) {
+func (receiptService *ReceiptServiceImpl) ProcessReceipt(c *gin.Context) {
 
-	var receipt Receipt
+	var receipt domain.Receipt
 
 	body, _ := io.ReadAll(c.Request.Body)
 
@@ -41,7 +46,7 @@ func processReceipt(c *gin.Context) {
 		return
 	}
 
-	receiptId, receiptIdErr := GenerateHash()
+	receiptId, receiptIdErr := domain.GenerateHash()
 
 	if receiptIdErr != nil {
 		log.Println(receiptIdErr)
@@ -49,16 +54,15 @@ func processReceipt(c *gin.Context) {
 		return
 	}
 
-	receipt.calculatePoints()
+	receipt.CalculatePoints()
 
 	receipt.Id = receiptId
 
 	receipts[receipt.Id] = receipt
 
-
-// 	Example Response:
-// ```json
-// { "id": "7fb1377b-b223-49d9-a31a-5a02701dd310" }
+	// 	Example Response:
+	// ```json
+	// { "id": "7fb1377b-b223-49d9-a31a-5a02701dd310" }
 
 	c.JSON(http.StatusOK, gin.H{"id": receipt.Id})
 }
