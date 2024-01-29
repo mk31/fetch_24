@@ -168,3 +168,27 @@ func TestIsTrimmedLengthMultipleOf3(t *testing.T) {
 		}
 	}
 }
+
+func TestIsPurchaseTimeBetween14And16Exclusive(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected bool
+	}{
+		{"14:00", false},
+		{"15:00", true},
+		{"14:01", true},
+		{"15:01", true},
+		{"15:59", true},
+		{"16:00", false},
+		{"16:01", false},
+	}
+
+	for _, test := range tests {
+
+		result := IsPurchaseTimeBetween14And16Exclusive(test.input)
+
+		if result != test.expected {
+			t.Errorf("Is purchase time between14 and16 exclusive for value: %v; expectd :%v and instead got: %v", test.input, test.expected, result)
+		}
+	}
+}

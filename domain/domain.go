@@ -168,10 +168,10 @@ func IsPurchaseTimeBetween14And16Exclusive(timeString string) bool {
 
 	minute := time.Minute()
 
-	// we know hour is 2 or 3
-	// if 3, all times work
-	// if 2, minute must be > 0
-	return hour == 3 || minute > 0
+	// we know hour is 14 or 15
+	// if 15, all times work
+	// if 14, minute must be > 0
+	return hour == 15 || minute > 0
 }
 
 func GenerateHash() (string, error) {
