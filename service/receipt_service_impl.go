@@ -3,6 +3,7 @@ package service
 import (
 	"encoding/json"
 	"fetch_24/domain"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -23,9 +24,14 @@ var receipts = make(map[string]domain.Receipt)
 func (receiptService *ReceiptServiceImpl) GetReceiptPoints(c *gin.Context) {
 	id := c.Param("id")
 
+	if len(id) == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "get receipt points endpoint requires id parameter" })
+		return
+	}
+
 	receipt, exists := receipts[id]
 	if !exists {
-		c.JSON(http.StatusNotFound, gin.H{"error": "No receipt found for that id"})
+		c.JSON(http.StatusNotFound, gin.H{"error": fmt.Sprintf("No receipt found for id: %v", id) })
 		return
 	}
 
