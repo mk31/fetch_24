@@ -30,50 +30,31 @@ type Item struct {
 // if/when there are other use cases, method definition may change from being a pointer receiver type
 func (receipt *Receipt) CalculatePoints() {
 
-	/*
-		√ * One point for every alphanumeric character in the retailer name.
-		√ * 50 points if the total is a round dollar amount with no cents.
-		√ * 25 points if the total is a multiple of `0.25`.
-		√ * 5 points for every two items on the receipt.
-		√ * If the trimmed length of the item description is a multiple of 3,
-				multiply the price by `0.2` and
-				round up to the nearest integer.
-				The result is the number of points earned.
-		√ * 6 points if the day in the purchase date is odd.
-		√ * 10 points if the time of purchase is after 2:00pm and before 4:00pm.
-	*/
+	totalPoints := 0
 
-	alphaPoints := CountAlphanumeric(receipt.Retailer)
-
-	pts50 := 0
+	totalPoints += CountAlphanumeric(receipt.Retailer)
 
 	if DoesStringPriceEndInZero(receipt.Total) {
-		pts50 = 50
+		totalPoints += 50
 	}
-
-	mult25Pts := 0
 
 	if DoesStringPriceEndIn25Multiple(receipt.Total) {
-		mult25Pts = 25
+		totalPoints += 25
 	}
 
-	mult2Points := CountMultiplesOf2(len(receipt.Items)) * 5
+	totalPoints += CountMultiplesOf2(len(receipt.Items)) * 5
 
-	mult3Pts := receipt.calculateItemDescriptionLengthPoints()
-
-	points6 := 0
+	totalPoints += receipt.calculateItemDescriptionLengthPoints()
 
 	if IsPurchaseDateDayOdd(receipt.PurchaseDate) {
-		points6 = 6
+		totalPoints += 6
 	}
-
-	points10 := 0
 
 	if IsPurchaseTimeBetween14And16Exclusive(receipt.PurchaseTime) {
-		points10 = 10
+		totalPoints += 10
 	}
 
-	receipt.Points = alphaPoints + pts50 + mult25Pts + mult2Points + mult3Pts + points6 + points10
+	receipt.Points = totalPoints
 
 }
 
