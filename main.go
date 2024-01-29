@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var receiptService *service.ReceiptServiceImpl
+var receiptService service.ReceiptService
 
 func main() {
 
