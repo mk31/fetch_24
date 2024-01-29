@@ -20,3 +20,9 @@ localhost/api/v1/receipts/process
 
 get points route
 localhost/api/v1/receipts/:id/points
+
+### TODOs
+Standardize error handling 
+Real api would of course have auth
+
+
