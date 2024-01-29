@@ -3,6 +3,6 @@ package service
 import "github.com/gin-gonic/gin"
 
 type Service interface {
-	getReceiptPoints(c *gin.Context)
-	processReceipt(c *gin.Context)
+	GetReceiptPoints(c *gin.Context)
+	ProcessReceipt(c *gin.Context)
 }

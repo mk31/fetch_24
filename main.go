@@ -11,6 +11,8 @@ var receiptService *service.ReceiptServiceImpl
 
 func main() {
 
+	registerServices()
+
 	ginEngine := gin.Default()
 
 	RegisterRoutes(ginEngine)
