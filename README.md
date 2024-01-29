@@ -23,7 +23,9 @@ localhost/api/v1/receipts/:id/points
 
 ### TODOs
 Standardize error handling 
-Real api would of course have auth
+Real api would have auth
 Log errors to some trackable location - slack for example
-
-
+Create a common library/package for code re-use
+CI/CD
+Instrument APM for tracing
+Create DAL/Repository for real data storage
